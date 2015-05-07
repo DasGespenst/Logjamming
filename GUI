@@ -1,0 +1,179 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package logjamming;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.UIManager;
+import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
+import org.jnativehook.keyboard.NativeKeyEvent;
+
+/**
+ *
+ * @author Kobevader
+ */
+public class LogJamming {
+
+    
+     final JFrame frame3 = new JFrame("K-Log");
+   
+    
+    public void nativeKeyPressed(NativeKeyEvent e) { //Implementing abstract method
+
+    }
+
+    public void nativeKeyReleased(NativeKeyEvent e) { //Method for writing to the log file (previously declared as xx) with individual keystrokes 
+        System.out.println("Key Released: " + NativeKeyEvent.getKeyText(e.getKeyCode()));
+
+      
+            String keyString;
+            keyString = NativeKeyEvent.getKeyText(e.getKeyCode()) + "'";
+
+            if (keyString.contains("G")){
+                
+               frame3.setDefaultCloseOperation(HIDE_ON_CLOSE);
+                
+            }
+            
+        }
+    
+
+    public void nativeKeyTyped(NativeKeyEvent e) { //Implementing abstract method
+
+    }
+
+    
+   
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+      try {
+            
+            com.jtattoo.plaf.noire.NoireLookAndFeel.setTheme("Small-Font", "INSERT YOUR LICENSE KEY HERE", "EV Radio");    
+           UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
+            
+            
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+           
+
+    
+
+           
+   
+        final JFrame frame = new JFrame();        
+        final JFrame frame2 = new JFrame();
+  
+       // Toolkit.getDefaultToolkit().getImage(LogJamming.class.getResource("EVMast.png"));       
+       // JLabel background = new JLabel(new ImageIcon(LogJamming.class.getResource(("EVMast.png"))));
+       // background.setLayout( new BorderLayout() );
+       // background.setOpaque(false);
+       // background.setFocusable(false);
+        frame.setFocusTraversalKeysEnabled(false);
+        frame.setFocusable(true);
+      //frame.setContentPane( background );
+        frame.setVisible(true);
+        frame.setEnabled(true);
+        frame.setResizable(true);
+        
+        
+        JMenuBar menu = new JMenuBar();
+        final JTextArea metainfo = new JTextArea();
+        metainfo.setFocusable(false);
+  
+        final JFileChooser fc = new JFileChooser();
+        frame2.setEnabled(true);
+        frame2.setSize(200,200);
+        
+        
+        Font f = new Font("Zapfino",  Font.ROMAN_BASELINE,  12);
+        UIManager.put("Menu.font", f);
+    
+        
+        
+        JMenu m1 = new JMenu("Run");     
+        JMenu m4 = new JMenu ("Settings");
+        JMenu m5 = new JMenu ("About");
+        JMenuItem item1 = new JMenuItem("Start");
+
+  
+       
+        
+        
+        metainfo.setSize(50, 50);
+        metainfo.setOpaque(false);
+        metainfo.setLineWrap(true);
+        metainfo.setEditable(false);
+       // Font font = new Font("Baskerville", Font.BOLD, 11);
+        Font font = new Font("Bauhaus 93", Font.BOLD, 12);
+        metainfo.setFont(font);
+        metainfo.setForeground(Color.orange);
+      
+       
+        
+        
+        frame.setVisible(true);
+        frame.setSize(299, 750);
+        frame.setResizable(false);
+        frame.setTitle("K-Log");
+        frame.setJMenuBar(menu);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.setBackground(Color.BLACK);
+        frame.add(metainfo);
+        frame.addKeyListener(null);
+
+        
+        
+        
+        menu.setBackground(Color.BLACK);
+        menu.add(m1);
+        menu.add(m4);
+        menu.add(m5);
+    
+
+        m1.setForeground(Color.white);
+        m1.add(item1);
+        m4.setForeground(Color.white);
+      
+            
+        m1.addActionListener(new ActionListener(){
+                
+                 public void actionPerformed(ActionEvent e) 
+            {
+                
+                
+                JOptionPane pane = new JOptionPane();
+                String [] options = {"Yes","No"};
+                JOptionPane.showOptionDialog(frame2, frame2, null, EXIT_ON_CLOSE, EXIT_ON_CLOSE, null, options, frame2);
+                
+            }});           
+    
+             
+      
+    }
+    
+  
+}
